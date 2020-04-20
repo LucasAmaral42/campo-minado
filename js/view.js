@@ -1,15 +1,22 @@
+// Desenha Bombas
+
 function draw_bomb(arr) {
   let td = document.querySelector(`#p${arr[0]}-${arr[1]}`)
   td.style.background = "url('../images/bomb-blast.jpg') center"
   td.style.backgroundSize = "contain"
 }
 
+// Desenha numeros
+
 function draw_number(arr, count) {
   let td = document.querySelector(`#p${arr[0]}-${arr[1]}`);
   if (count != 0) {
     td.innerHTML = count;
   }
-  td.style.backgroundColor = '#e5e8e8'
+  else{
+    td.innerHTML = "&nbsp&nbsp"
+  }
+  td.style.background = '#aeb6bf'
 }
 
 // Renderização dos quadrados do jogo
@@ -24,6 +31,8 @@ function render_rows() {
   activate_flag();
 }
 
+// Renderização das Bandeiras
+
 function draw_flag(arr) {
   square = document.querySelector(`#p${arr[0]}-${arr[1]}`)
   square.innerHTML = "&nbsp"
@@ -36,5 +45,9 @@ function remove_flag(arr) {
   square.innerHTML = ""
   square.style.background = "white"
 }
+
+// Adiciona quantidade de bombas ao jogo
+
+document.querySelector("#bomb-count").innerHTML = how_many_bombs()
 
 render_rows()

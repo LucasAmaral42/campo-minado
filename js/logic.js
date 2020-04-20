@@ -12,10 +12,13 @@ map = [
 ]
 var flags = []
 
+// Verificação dos cliques
+
 function click_check(arr) {
   check(arr)? is_a_bomb(arr) : not_a_bomb(arr)  
 }
 
+// Verifica se é uma bomba ou não
 function check(arr) {
   try {
     return map[arr[0]][arr[1]] == 1
@@ -24,6 +27,7 @@ function check(arr) {
   }
 }
 
+// Limpa a tela
 function screen_cleaner() {
   location.reload()
 }
@@ -58,7 +62,7 @@ function not_a_bomb(arr) {
 // Bombas aleatórias
 function generate_bombs(bombs) {
   for (let i = 0; i < bombs; i++) {
-    pos = random_bombs()
+    let pos = random_bombs()
     map[pos[0]][pos[1]] = 1
   }
 }
@@ -79,6 +83,7 @@ function timer() {
   }, 1000)
 }
 
+// Flag
 function activate_flag() {
   let squares = document.querySelectorAll('td')
   squares.forEach((square) =>{
@@ -87,16 +92,20 @@ function activate_flag() {
       s = square.id
       pos = s.match(/p(\d)-(\d)/);
       pos = [parseInt(pos[1]), parseInt(pos[2])]
-      if (!is_a_number(pos)) {
+      if (not_a_number(pos)) {
         flag(pos)
       }
     })
   }) 
 }
 
-function is_a_number(arr) {
-  
+function not_a_number(arr) {
+  return document.querySelector(`#p${arr[0]}-${arr[1]}`).innerHTML == '' ||
+  document.querySelector(`#p${arr[0]}-${arr[1]}`).innerHTML == '&nbsp;'
 }
+
+
+// Bandeiras
 
 function flag(arr) {
   square = document.querySelector(`#p${arr[0]}-${arr[1]}`)
@@ -114,8 +123,39 @@ function flags_remove(arr) {
   flags.forEach((e, index) => {
     if (e[0] == arr[0] && e[1] == arr[1]) {
       delete flags[index]
+      flags[0]--
     } 
   });
+}
+
+// Verifica se ganhou
+
+function win() {
+  let bombs = how_many_bombs();
+  let count = 0;
+  flags.forEach(ele => {
+    check(ele)? count++ : null
+  })
+  if (count == bombs) {
+    alert("Você ganhou!!!")
+  }
+  else{
+    alert("Quase lá!")
+  }
+}
+
+// Quantidade de bombas no jogo
+
+function how_many_bombs() {
+  count = 0;
+  for (let i = 0; i < map.length; i++) {
+    for (let j = 0; j < map[i].length; j++) {
+      if (map[i][j] == 1) {
+        count++;
+      }      
+    }
+  }
+  return count
 }
 
 generate_bombs(15)

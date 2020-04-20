@@ -8,12 +8,18 @@
 </head>
 <body>
 
-  <table id="table" border="1">
+  <table id="table">
     <tr id="header">
       <th colspan="9" >
-        Nº de bombas:<span id="n-bombs">15</span> - 
-        <button id="button" onclick="screen_cleaner()">Reset</button> - 
-        Tempo:<span id="time">0</span> 
+        <div class="header">
+          <span>Tempo: <span id="time">0</span>s</span>
+          <span>
+            <img class="bomb" src="images/bomb.png">
+            <span id="bomb-count"></span>
+          </span>
+          <img id="reset" src="/images/reset.jpeg" onclick="screen_cleaner()">
+          <img class="verify" src="/images/verify.png">
+        </div>
       </th>
     </tr>
     <tr></tr>
