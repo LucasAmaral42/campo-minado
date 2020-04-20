@@ -6,6 +6,7 @@ body{
 td {
   cursor: pointer;
   text-align: center;
+  border: outset 3px gray;
   height: 2em;
   width: 2em;
 }
