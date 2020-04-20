@@ -10,6 +10,7 @@ map = [
   [0,0,0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0,0,0]
 ]
+var flags = []
 
 function click_check(arr) {
   check(arr)? is_a_bomb(arr) : not_a_bomb(arr)  
@@ -34,8 +35,7 @@ function is_a_bomb(arr) {
   screen_cleaner()
 }
 
-function not_a_bomb(arr, previous) {
-  previous += arr
+function not_a_bomb(arr) {
   around = {
     "up-left": [arr[0]-1, arr[1]-1],
     "up": [arr[0]-1, arr[1]],
@@ -64,8 +64,8 @@ function generate_bombs(bombs) {
 }
 
 function random_bombs(){
-  line = Math.floor(Math.random() * 9)
-  col = Math.floor(Math.random() * 9)
+  let line = Math.floor(Math.random() * 9)
+  let col = Math.floor(Math.random() * 9)
   return [line, col]
 }
 
@@ -77,6 +77,45 @@ function timer() {
     l.innerHTML = s
     s++
   }, 1000)
+}
+
+function activate_flag() {
+  let squares = document.querySelectorAll('td')
+  squares.forEach((square) =>{
+    square.addEventListener('contextmenu', e => {
+      e.preventDefault();
+      s = square.id
+      pos = s.match(/p(\d)-(\d)/);
+      pos = [parseInt(pos[1]), parseInt(pos[2])]
+      if (!is_a_number(pos)) {
+        flag(pos)
+      }
+    })
+  }) 
+}
+
+function is_a_number(arr) {
+  
+}
+
+function flag(arr) {
+  square = document.querySelector(`#p${arr[0]}-${arr[1]}`)
+  if (square.innerHTML == "&nbsp;") {
+    flags_remove(arr)
+    remove_flag(arr)
+  }
+  else{
+    flags.push(arr)
+    draw_flag(arr)
+  }
+}
+
+function flags_remove(arr) {
+  flags.forEach((e, index) => {
+    if (e[0] == arr[0] && e[1] == arr[1]) {
+      delete flags[index]
+    } 
+  });
 }
 
 generate_bombs(15)

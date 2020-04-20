@@ -1,4 +1,5 @@
 body{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   display: flex;
   justify-content: center;
 }
@@ -11,16 +12,8 @@ td {
   width: 2em;
 }
 
-table{
-  width: 415px;
-}
-
 th {
+  font-size: 0.92em;
   padding: 0.5em;
   border-radius: 2em;
-}
-
-.bomb{
-  background: url('images/bomb-blast.jpg') no-repeat center;
-  background-size: contain;
 }
