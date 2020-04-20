@@ -1,14 +1,12 @@
 // Mapa Jogo
 map = [
-  [0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0],
-  [0,0,0,0,0,0,0,0,0]
+  [0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0],
+  [0,0,0,0,0,0,0]
 ]
 var flags = []
 
@@ -68,8 +66,8 @@ function generate_bombs(bombs) {
 }
 
 function random_bombs(){
-  let line = Math.floor(Math.random() * 9)
-  let col = Math.floor(Math.random() * 9)
+  let line = Math.floor(Math.random() * 7)
+  let col = Math.floor(Math.random() * 7)
   return [line, col]
 }
 
@@ -158,5 +156,5 @@ function how_many_bombs() {
   return count
 }
 
-generate_bombs(15)
+generate_bombs(10)
 timer()

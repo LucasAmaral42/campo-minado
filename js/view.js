@@ -24,7 +24,7 @@ function draw_number(arr, count) {
 function render_rows() {
   rows = document.querySelectorAll("table#table tr:not(#header)")
   rows.forEach((row, index) => {
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < 7; i++) {
       row.innerHTML += `<td id="p${index}-${i}" onclick="click_check([${index},${i}])"></td>`  
     }
   });
