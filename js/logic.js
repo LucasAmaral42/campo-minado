@@ -161,6 +161,15 @@ function verify() {
     }
   }
   win()
+  if (isMobileDevice()) {
+    for (let i = 0; i < map.length; i++) {
+      for (let j = 0; j < map[i].length; j++) {
+        if (map[i][j] != "number") {
+          flag([i,j])
+        }
+      }
+    }
+  }
 }
 
 // Quantidade de bombas no jogo
