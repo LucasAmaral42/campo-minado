@@ -54,3 +54,8 @@ function draw_how_many_bombs() {
 }
 
 render_rows()
+
+
+function valid(arr) {
+  return arr[0] >= 0 && arr[0] < 7 && arr[1] >= 0 && arr[1] < 7
+}

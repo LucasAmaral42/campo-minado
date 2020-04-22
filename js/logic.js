@@ -49,41 +49,28 @@ function is_a_bomb(arr) {
 }
 
 function not_a_bomb(arr) {
-  let around = {
-    "up-left": [arr[0]-1, arr[1]-1],
-    "up": [arr[0]-1, arr[1]],
-    "up-right": [arr[0]-1, arr[1]+1],
-    "right": [arr[0], arr[1]+1],
-    "down-right": [arr[0]+1, arr[1]+1],
-    "down": [arr[0]+1, arr[1]],
-    "down-left": [arr[0]+1, arr[1]-1],
-    "left": [arr[0], arr[1]-1]
+  if (valid_size(arr) && not_a_number(arr)) {
+    let around = {
+      "up-left": [arr[0]-1, arr[1]-1],
+      "up": [arr[0]-1, arr[1]],
+      "up-right": [arr[0]-1, arr[1]+1],
+      "right": [arr[0], arr[1]+1],
+      "down-right": [arr[0]+1, arr[1]+1],
+      "down": [arr[0]+1, arr[1]],
+      "down-left": [arr[0]+1, arr[1]-1],
+      "left": [arr[0], arr[1]-1]
+    }
+    let count = 0
+    for (const [key, value] of Object.entries(around)) {
+      check(value)? count++ : null
+    }
+    draw_number(arr, count)
+    if (count == 0) {
+      for (const [key, value] of Object.entries(around)) {
+        not_a_bomb(value)
+      }
+    }
   }
-
-  let count = 0
-  for (const [key, value] of Object.entries(around)) {
-    check(value)? count++ : draw_number(value, count_near_bombs(value))
-  }
-  draw_number(arr, count)
-}
-
-function count_near_bombs(arr) {
-  let around = {
-    "up-left": [arr[0]-1, arr[1]-1],
-    "up": [arr[0]-1, arr[1]],
-    "up-right": [arr[0]-1, arr[1]+1],
-    "right": [arr[0], arr[1]+1],
-    "down-right": [arr[0]+1, arr[1]+1],
-    "down": [arr[0]+1, arr[1]],
-    "down-left": [arr[0]+1, arr[1]-1],
-    "left": [arr[0], arr[1]-1]
-  }
-  
-  let count = 0;
-  for (const [key, value] of Object.entries(around)) {
-    check(value)? count++ : null
-  }
-  return count
 }
 
 // Bombas aleatórias
@@ -124,12 +111,6 @@ function activate_flag() {
       }
     })
   }) 
-}
-
-// Não é um número
-function not_a_number(arr) {
-  return document.querySelector(`#p${arr[0]}-${arr[1]}`).innerHTML == '' ||
-  document.querySelector(`#p${arr[0]}-${arr[1]}`).childElementCount != 0
 }
 
 // Bandeiras
@@ -201,5 +182,17 @@ function isMobileDevice() {
   return (typeof window.orientation !== "undefined") 
   || (navigator.userAgent.indexOf('IEMobile') !== -1);
 };
+
+// Verifica se está dentro do mapa
+function valid_size(arr) {
+  return arr[0] >= 0 && arr[0] < map.length && arr[1] >= 0 && arr[1] < map.length
+}
+
+// Não é um número
+function not_a_number(arr) {
+  return document.querySelector(`#p${arr[0]}-${arr[1]}`).innerHTML == '' ||
+  document.querySelector(`#p${arr[0]}-${arr[1]}`).childElementCount != 0
+}
+
 
 timer()
