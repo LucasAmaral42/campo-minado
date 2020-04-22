@@ -2,21 +2,26 @@
 
 function draw_bomb(arr) {
   let td = document.querySelector(`#p${arr[0]}-${arr[1]}`)
-  td.style.background = "url('../images/bomb-blast.jpg') center"
+  td.style.background = "url('../images/bomb.png') center"
   td.style.backgroundSize = "contain"
 }
 
 // Desenha numeros
 
 function draw_number(arr, count) {
-  let td = document.querySelector(`#p${arr[0]}-${arr[1]}`);
-  if (count != 0) {
-    td.innerHTML = count;
+  try{
+    let td = document.querySelector(`#p${arr[0]}-${arr[1]}`);
+    if (count != 0) {
+      td.innerHTML = count;
+    }
+    else{
+      td.innerHTML = "&nbsp&nbsp"
+    }
+    td.style.background = '#aeb6bf'
+    map[arr[0]][arr[1]] = 'number'
   }
-  else{
-    td.innerHTML = "&nbsp&nbsp"
+  catch(e){
   }
-  td.style.background = '#aeb6bf'
 }
 
 // Renderização dos quadrados do jogo
@@ -35,15 +40,12 @@ function render_rows() {
 
 function draw_flag(arr) {
   square = document.querySelector(`#p${arr[0]}-${arr[1]}`)
-  square.innerHTML = "&nbsp"
-  square.style.background = "url('../images/flag.png') center"
-  square.style.backgroundSize = "contain"
+  square.innerHTML = "<i class='fas fa-flag'></i>"
 }
 
 function remove_flag(arr) {
   square = document.querySelector(`#p${arr[0]}-${arr[1]}`)
   square.innerHTML = ""
-  square.style.background = "white"
 }
 
 // Adiciona quantidade de bombas ao jogo

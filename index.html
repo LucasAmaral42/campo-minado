@@ -19,7 +19,7 @@
             <span id="bomb-count"></span>
           </span>
           <span id="reset" onclick="screen_cleaner()"><i class="fas fa-undo"></i></span>
-          <span class="verify" onclick="win()"><i class="far fa-check-circle"></i></span>
+          <span class="verify" onclick="verify()"><i class="far fa-check-circle"></i></span>
         </div>
       </th>
     </tr>
@@ -32,6 +32,15 @@
     <tr></tr>
   </table>
 
+  <ul>
+    <li>
+      Para Verificar se ganhou, 
+      <br/>basta clicar no botão 
+      <span class="verify-less" onclick="win()">
+        <i class="far fa-check-circle"></i>
+      </span>
+    </li>
+  </ul>
   <script src="js/logic.js"></script>
   <script src="js/view.js"></script>
 </body>

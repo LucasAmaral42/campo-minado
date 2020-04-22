@@ -13,7 +13,9 @@ var flags = []
 // Verificação dos cliques
 
 function click_check(arr) {
-  check(arr)? is_a_bomb(arr) : not_a_bomb(arr)  
+  if (not_a_number(arr)) {
+    check(arr)? is_a_bomb(arr) : not_a_bomb(arr)  
+  }
 }
 
 // Verifica se é uma bomba ou não
@@ -38,7 +40,26 @@ function is_a_bomb(arr) {
 }
 
 function not_a_bomb(arr) {
-  around = {
+  let around = {
+    "up-left": [arr[0]-1, arr[1]-1],
+    "up": [arr[0]-1, arr[1]],
+    "up-right": [arr[0]-1, arr[1]+1],
+    "right": [arr[0], arr[1]+1],
+    "down-right": [arr[0]+1, arr[1]+1],
+    "down": [arr[0]+1, arr[1]],
+    "down-left": [arr[0]+1, arr[1]-1],
+    "left": [arr[0], arr[1]-1]
+  }
+
+  let count = 0
+  for (const [key, value] of Object.entries(around)) {
+    check(value)? count++ : draw_number(value, count_near_bombs(value))
+  }
+  draw_number(arr, count)
+}
+
+function count_near_bombs(arr) {
+  let around = {
     "up-left": [arr[0]-1, arr[1]-1],
     "up": [arr[0]-1, arr[1]],
     "up-right": [arr[0]-1, arr[1]+1],
@@ -53,8 +74,7 @@ function not_a_bomb(arr) {
   for (const [key, value] of Object.entries(around)) {
     check(value)? count++ : null
   }
-  
-  draw_number(arr, count)
+  return count
 }
 
 // Bombas aleatórias
@@ -83,7 +103,7 @@ function timer() {
 
 // Flag
 function activate_flag() {
-  let squares = document.querySelectorAll('td')
+  let squares = document.querySelectorAll('td') 
   squares.forEach((square) =>{
     square.addEventListener('contextmenu', e => {
       e.preventDefault();
@@ -97,17 +117,16 @@ function activate_flag() {
   }) 
 }
 
+// Não é um número
 function not_a_number(arr) {
   return document.querySelector(`#p${arr[0]}-${arr[1]}`).innerHTML == '' ||
-  document.querySelector(`#p${arr[0]}-${arr[1]}`).innerHTML == '&nbsp;'
+  document.querySelector(`#p${arr[0]}-${arr[1]}`).childElementCount != 0
 }
 
-
 // Bandeiras
-
 function flag(arr) {
   square = document.querySelector(`#p${arr[0]}-${arr[1]}`)
-  if (square.innerHTML == "&nbsp;") {
+  if (square.childElementCount != 0) {
     flags_remove(arr)
     remove_flag(arr)
   }
@@ -121,25 +140,36 @@ function flags_remove(arr) {
   flags.forEach((e, index) => {
     if (e[0] == arr[0] && e[1] == arr[1]) {
       delete flags[index]
-      flags[0]--
     } 
   });
+  flags.length--
 }
 
 // Verifica se ganhou
-
 function win() {
   let bombs = how_many_bombs();
   let count = 0;
   flags.forEach(ele => {
     check(ele)? count++ : null
   })
-  if (count == bombs) {
+  if (count == bombs && count == flags.length) {
     alert("Você ganhou!!!")
   }
   else{
     alert("Quase lá!")
   }
+}
+
+// Verifica as bombas
+function verify() {
+  for (let i = 0; i < map.length; i++) {
+    for (let j = 0; j < map[i].length; j++) {
+      if (map[i][j] != "number") {
+        flag([i,j])
+      }
+    }
+  }
+  win()
 }
 
 // Quantidade de bombas no jogo
@@ -155,6 +185,10 @@ function how_many_bombs() {
   }
   return count
 }
+
+// Bandeiras click direito
+
+
 
 generate_bombs(10)
 timer()
