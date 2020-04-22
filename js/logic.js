@@ -9,10 +9,18 @@ let map = [
   [0,0,0,0,0,0,0]
 ]
 var flags = []
+var fc = true;
 
 // Verificação dos cliques
-
 function click_check(arr) {
+  if (fc == true) {
+    generate_bombs(10)
+    if (check(arr)) {
+      map[arr[0]][arr[1]] = 0;
+      not_a_bomb(arr)
+    }
+    fc = false
+  }
   if (not_a_number(arr)) {
     check(arr)? is_a_bomb(arr) : not_a_bomb(arr)  
   }
@@ -139,10 +147,9 @@ function flag(arr) {
 function flags_remove(arr) {
   flags.forEach((e, index) => {
     if (e[0] == arr[0] && e[1] == arr[1]) {
-      delete flags[index]
+      flags.splice(index, 1)
     } 
   });
-  flags.length--
 }
 
 // Verifica se ganhou
@@ -194,5 +201,4 @@ function isMobileDevice() {
   || (navigator.userAgent.indexOf('IEMobile') !== -1);
 };
 
-generate_bombs(10)
 timer()
