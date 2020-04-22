@@ -8,19 +8,18 @@ function draw_bomb(arr) {
 // Desenha numeros
 
 function draw_number(arr, count) {
-  try{
-    let td = document.querySelector(`#p${arr[0]}-${arr[1]}`);
-    if (count != 0) {
-      td.innerHTML = count;
-    }
-    else{
-      td.innerHTML = "&nbsp&nbsp"
-    }
-    td.style.background = '#aeb6bf'
-    map[arr[0]][arr[1]] = 'number'
+  let td = document.querySelector(`#p${arr[0]}-${arr[1]}`);
+  if (td.childElementCount != 0) {
+    flags_remove(arr)
   }
-  catch(e){
+  if (count != 0) {
+    td.innerHTML = count;
   }
+  else{
+    td.innerHTML = "&nbsp&nbsp"
+  }
+  td.style.background = '#aeb6bf'
+  map[arr[0]][arr[1]] = 'number'
 }
 
 // Renderização dos quadrados do jogo
