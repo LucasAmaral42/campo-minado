@@ -2,8 +2,7 @@
 
 function draw_bomb(arr) {
   let td = document.querySelector(`#p${arr[0]}-${arr[1]}`)
-  td.style.background = "url('../images/bomb.png') center"
-  td.style.backgroundSize = "contain"
+  td.innerHTML = '<i class="fas fa-bomb"></i>'
 }
 
 // Desenha numeros
