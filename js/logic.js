@@ -162,10 +162,12 @@ function win() {
 
 // Verifica as bombas
 function verify() {
-  for (let i = 0; i < map.length; i++) {
-    for (let j = 0; j < map[i].length; j++) {
-      if (map[i][j] != "number") {
-        flag([i,j])
+  if (isMobileDevice()) {
+    for (let i = 0; i < map.length; i++) {
+      for (let j = 0; j < map[i].length; j++) {
+        if (map[i][j] != "number") {
+          flag([i,j])
+        }
       }
     }
   }
@@ -186,9 +188,11 @@ function how_many_bombs() {
   return count
 }
 
-// Bandeiras click direito
-
-
+// Verifica se é mobile
+function isMobileDevice() {
+  return (typeof window.orientation !== "undefined") 
+  || (navigator.userAgent.indexOf('IEMobile') !== -1);
+};
 
 generate_bombs(10)
 timer()
