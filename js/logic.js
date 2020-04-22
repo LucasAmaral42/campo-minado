@@ -1,5 +1,5 @@
 // Mapa Jogo
-let map = [
+map = [
   [0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0],
   [0,0,0,0,0,0,0],
@@ -24,6 +24,7 @@ function click_check(arr) {
   if (not_a_number(arr)) {
     check(arr)? is_a_bomb(arr) : not_a_bomb(arr)  
   }
+  draw_how_many_bombs()
 }
 
 // Verifica se é uma bomba ou não

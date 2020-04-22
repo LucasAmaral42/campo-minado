@@ -49,7 +49,8 @@ function remove_flag(arr) {
 }
 
 // Adiciona quantidade de bombas ao jogo
-
-document.querySelector("#bomb-count").innerHTML = how_many_bombs()
+function draw_how_many_bombs() {
+  document.querySelector("#bomb-count").innerHTML = how_many_bombs()
+}
 
 render_rows()
