@@ -9,20 +9,23 @@ map = [
   [0,0,0,0,0,0,0]
 ]
 var flags = []
-var fc = true;
+var empty_board = true;
+var intervalId = null;
 
 // Verificação dos cliques
 function click_check(arr) {
-  if (fc == true) {
+  if (empty_board) {
     generate_bombs(10)
     if (check(arr)) {
       map[arr[0]][arr[1]] = 0;
       not_a_bomb(arr)
     }
-    fc = false
+    empty_board = false
+    intervalId = timer()
   }
+
   if (not_a_number(arr)) {
-    check(arr)? is_a_bomb(arr) : not_a_bomb(arr)  
+    check(arr)? is_a_bomb(arr) : not_a_bomb(arr)
   }
   draw_how_many_bombs()
 }
@@ -91,7 +94,7 @@ function random_bombs(){
 function timer() {
   let s = 0
   let l = document.getElementById("time")
-  setInterval(function() {
+  return setInterval(function() {
     l.innerHTML = s
     s++
   }, 1000)
@@ -138,11 +141,19 @@ function flags_remove(arr) {
 function win() {
   let bombs = how_many_bombs();
   let count = 0;
-  flags.forEach(ele => {
-    check(ele)? count++ : null
+
+  flags.forEach(elem => {
+    check(elem)? count++ : null
   })
+
+  if (empty_board) {
+    alert("Você ainda não começou o jogo!")
+    return;
+  }
+
   if (count == bombs && count == flags.length) {
     alert("Você ganhou!!!")
+    clearInterval(intervalId)
   }
   else{
     alert("Quase lá!")
@@ -180,7 +191,7 @@ function how_many_bombs() {
     for (let j = 0; j < map[i].length; j++) {
       if (map[i][j] == 1) {
         count++;
-      }      
+      }
     }
   }
   return count
@@ -188,9 +199,8 @@ function how_many_bombs() {
 
 // Verifica se é mobile
 function isMobileDevice() {
-  return (typeof window.orientation !== "undefined") 
-  || (navigator.userAgent.indexOf('IEMobile') !== -1);
-};
+  return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
 
 // Verifica se está dentro do mapa
 function valid_size(arr) {
@@ -202,6 +212,3 @@ function not_a_number(arr) {
   return document.querySelector(`#p${arr[0]}-${arr[1]}`).innerHTML == '' ||
   document.querySelector(`#p${arr[0]}-${arr[1]}`).childElementCount != 0
 }
-
-
-timer()

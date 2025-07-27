@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Campo Minado</title>
   <link rel="stylesheet" href="css/main.css">
-  <script src="https://kit.fontawesome.com/3d603cac36.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/a9e886b16e.js" crossorigin="anonymous"></script>
 </head>
-<body>
 
+<body>
   <table id="table">
     <tr id="header">
-      <th colspan="9" >
+      <th colspan="9">
         <div class="header">
           <span>Tempo: <span id="time">0</span>s</span>
+
           <span>
-            <img class="bomb" src="images/bomb.png">
+            <i class="fa-solid fa-bomb fa-2xl"></i>
             <span id="bomb-count"></span>
           </span>
+
           <span id="reset" onclick="screen_cleaner()"><i class="fas fa-undo"></i></span>
           <span class="verify" onclick="verify()"><i class="far fa-check-circle"></i></span>
         </div>
@@ -33,23 +36,24 @@
   </table>
   <ul>
     <li>
-      Para Verificar se ganhou, 
-      <br/>basta clicar no botão 
+      Para Verificar se ganhou,
+      <br />basta clicar no botão
       <span class="verify-less" onclick="win()">
         <i class="far fa-check-circle"></i>
       </span>
     </li>
     <li>
-      Computador: Botão direito do mouse <br/>
-      coloca as bandeiras <i class='fas fa-flag'></i>
+      Computador: Botão direito do mouse <br />
+      coloca as bandeiras <i class="fa-solid fa-flag"></i>
     </li>
     <li>
-      Mobile: Não tem como colocar<br/>
-      as bandeiras <i class='fas fa-flag'></i><br/>
+      Mobile: Não tem como colocar<br />
+      as bandeiras <i class="fa-solid fa-flag"></i><br />
       * Apenas ao tocar no <i class="far fa-check-circle"></i>
     </li>
   </ul>
   <script src="js/logic.js"></script>
   <script src="js/view.js"></script>
 </body>
+
 </html>

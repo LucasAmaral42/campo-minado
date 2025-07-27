@@ -2,7 +2,7 @@
 
 function draw_bomb(arr) {
   let td = document.querySelector(`#p${arr[0]}-${arr[1]}`)
-  td.innerHTML = '<i class="fas fa-bomb"></i>'
+  td.innerHTML = '<i class="fa-solid fa-bomb"></i>'
 }
 
 // Desenha numeros
@@ -38,7 +38,7 @@ function render_rows() {
 
 function draw_flag(arr) {
   square = document.querySelector(`#p${arr[0]}-${arr[1]}`)
-  square.innerHTML = "<i class='fas fa-flag'></i>"
+  square.innerHTML = '<i class="fa-solid fa-flag"></i>'
 }
 
 function remove_flag(arr) {
